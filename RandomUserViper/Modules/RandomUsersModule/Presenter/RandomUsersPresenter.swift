@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 // MARK: - The RandomUsersModule's Presenter base part.
 class RandomUsersPresenter {
@@ -37,7 +38,7 @@ extension RandomUsersPresenter: PresenterProtocolToInteractor {
     
     /// Will be called if (after a new seed value) the fetch was successful.
     func didUserFetchSuccess(users: [User]) {
-        self.users.append(contentsOf: users)
+        newValueArrived(users: users)
         viewProtocolToPresenter?.didRandomUsersAvailable()
     }
     
@@ -48,8 +49,21 @@ extension RandomUsersPresenter: PresenterProtocolToInteractor {
     
     /// Will be called if any error occured while the requests.
     func didUserPageSuccess(users: [User]) {
-        self.users.append(contentsOf: users)
+        newValueArrived(users: users)
         viewProtocolToPresenter?.didEndRandomUsersPaging()
+    }
+    
+    private func newValueArrived(users: [User]) {
+        self.users.append(contentsOf: users)
+        do {
+            let container = try Container()
+            try container.write { transaction in
+                transaction.delete(container.realm.objects(UserObject.self))
+                transaction.add(self.users)
+            }
+        } catch {
+            
+        }
     }
 }
 
@@ -111,5 +125,25 @@ extension RandomUsersPresenter: PresenterProtocolToView {
     /// Fetch some random users.
     func getRandomUsers() {
         interactorProtocolToPresenter?.getUsers(page: nextPage, results: numberOfUsersPerPage, seed: seed)
+    }
+    
+    /// Load the previously cached users.
+    func getCachedUsers() {
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            defer {
+                self.viewProtocolToPresenter?.stopRefreshing()
+            }
+            do {
+                let users = try Container().realm.objects(UserObject.self)
+                if users.count > self.numberOfUsersPerPage {
+                    for user in users {
+                        self.users.append(User(managedObject: user))
+                    }
+                    self.viewProtocolToPresenter?.didRandomUsersAvailable()
+                }
+            } catch {
+                
+            }
+        }
     }
 }

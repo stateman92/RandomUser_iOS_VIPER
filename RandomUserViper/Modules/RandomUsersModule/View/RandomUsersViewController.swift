@@ -149,15 +149,21 @@ extension RandomUsersViewController {
 // MARK: - RandomUserProtocol (reaction to the Presenter) part.
 extension RandomUsersViewController: ViewProtocolToPresenter {
     
+    /// Will be called if the refresh should be ended.
+    func stopRefreshing() {
+        stopAnimating()
+        tableView.reloadData()
+    }
+    
     /// VIPER architecture.
     func injectPresenter(_ presenterProtocolToView: PresenterProtocolToView) {
         self.presenterProtocolToView = presenterProtocolToView
-        self.presenterProtocolToView?.getRandomUsers()
+        self.presenterProtocolToView?.getCachedUsers()
     }
     
     /// After successfully filled the array of the data, stop the animation and animate the `UITableView`.
     func didRandomUsersAvailable() {
-        self.stopAnimating()
+        stopAnimating()
         tableView.animateUITableView {
             self.presenterProtocolToView?.enableFetching()
         }

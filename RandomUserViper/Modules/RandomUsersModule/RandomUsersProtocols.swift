@@ -30,6 +30,9 @@ protocol PresenterProtocolToView {
     /// Fetch some random users.
     func getRandomUsers()
     
+    /// Load the previously cached users.
+    func getCachedUsers()
+    
     /// Fetch some new random users.
     func refresh(withDelay: Double)
     
@@ -57,6 +60,9 @@ protocol ViewProtocolToPresenter {
     
     /// Will be called if any error occured while the requests.
     func didErrorOccuredWhileDownload(errorMessage: String)
+    
+    /// Will be called if the refresh should be ended.
+    func stopRefreshing()
 }
 
 // MARK: - Router needs to implement this (Presenter use it).
