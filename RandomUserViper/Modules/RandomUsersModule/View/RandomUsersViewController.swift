@@ -25,8 +25,6 @@ class RandomUsersViewController: UIViewController {
     /// After the user claims that wants to refresh, the cells dissolves with this delay.
     /// After that the Presenter can start the refresh.
     private let refreshDelay = 0.33
-    private var selectedRow: Int? = nil
-    private let detailsSegue = "showDetailsSegue"
 }
 
 // MARK: - UIViewController lifecycle (and all that related to it) part.
@@ -105,11 +103,10 @@ extension RandomUsersViewController: UITableViewDelegate, UITableViewDataSource 
     
     /// After a cell get selected, perform a segue and deselect the cell.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedRow = indexPath.row
         let cell: RandomUserTableViewCell = tableView.cell(at: indexPath)
         cell.userImage.heroID = HeroIDs.imageEnlarging.rawValue
         cell.userName.heroID = HeroIDs.textEnlarging.rawValue
-        performSegue(withIdentifier: detailsSegue, sender: self)
+        randomUsersPresenter.showRandomUserDetailsController(selected: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
