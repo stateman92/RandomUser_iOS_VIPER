@@ -7,37 +7,43 @@
 //
 
 import UIKit
+import Lottie
 
-// MARK: - The RandomUsersModule's ViewController base part.
+// MARK: - The main View base part.
 class RandomUsersViewController: UIViewController {
     
     /// VIPER architecture element.
-    var presenterProtocolToView: PresenterProtocolToView?
+    var randomUsersPresenter: RandomUserPresenterProtocol = RandomUsersPresenter()
     
     @IBOutlet weak var tableView: UITableView!
     
     private let refreshControl = UIRefreshControl()
     
-    /// Shows weather the initial users' data downloaded.
-    private var activityIndicatorView = UIActivityIndicatorView()
+    /// Shows weather the initial users' data downloaded (or retrieved from cache).
+    private var animationView = AnimationView(name: "loading")
     
-    /// After the user claim that wants to refresh, the cells dissolves with this delay. After that the Presenter can start the refresh.
+    /// After the user claims that wants to refresh, the cells dissolves with this delay.
+    /// After that the Presenter can start the refresh.
     private let refreshDelay = 0.33
+    private var selectedRow: Int? = nil
+    private let detailsSegue = "showDetailsSegue"
 }
 
-// MARK: - UIViewController lifecycle part.
+// MARK: - UIViewController lifecycle (and all that related to it) part.
 extension RandomUsersViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        randomUsersPresenter.injectView(self)
+        
         setupBackButtonOnNextVC()
         setupLeftBarButton()
         
-        activityIndicatorView.configure()
+        animationView.configure(on: view)
         setupTableViewAndRefreshing()
         
-        activityIndicatorView.startAnimating()
+        navigationController?.hero.isEnabled = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -58,35 +64,33 @@ extension RandomUsersViewController: UITableViewDelegate, UITableViewDataSource 
     /// If currently refreshing or downloads the initial users, show `0` cells. Otherwise show the `currentMaxUsers`.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         refreshUserCounter()
-        if activityIndicatorView.isAnimating || refreshControl.isRefreshing {
+        if animationView.isAnimationPlaying || refreshControl.isRefreshing {
             return 0
         } else {
-            return presenterProtocolToView?.currentMaxUsers ?? 0
+            return randomUsersPresenter.currentMaxUsers
         }
     }
     
     /// If the cell is ready to be displayed, then display it, otherwise show a loading animation (with hidden content).
     /// - SeeAlso:
-    /// `PresenterProtocolToView`'s `currentMaxUsers` variable.
+    /// `RandomUsersPresenter`'s `currentMaxUsers` variable.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: RandomUserTableViewCell = tableView.cell(indexPath: indexPath)
         cell.initialize()
-        if indexPath.row < presenterProtocolToView?.users.count ?? 0 {
+        if indexPath.row < randomUsersPresenter.users.count {
             cell.showContent()
-            cell.configureData(withUser: presenterProtocolToView?.users[indexPath.row])
+            cell.configureData(withUser: randomUsersPresenter.users[indexPath.row])
         } else {
             cell.hideContent()
-            if indexPath.row == presenterProtocolToView?.users.count ?? 0 {
-                presenterProtocolToView?.getRandomUsers()
-            }
+            randomUsersPresenter.getRandomUsers()
         }
         return cell
     }
     
     /// After the initial download (while the `activityIndicatorView` is animating), refresh the data.
     @objc func tableViewPullToRefresh() {
-        if !activityIndicatorView.isAnimating {
-            presenterProtocolToView?.refresh(withDelay: refreshDelay)
+        if !animationView.isAnimationPlaying {
+            randomUsersPresenter.refresh(withDelay: refreshDelay)
         } else {
             refreshControl.endRefreshing()
         }
@@ -99,12 +103,13 @@ extension RandomUsersViewController: UITableViewDelegate, UITableViewDataSource 
         }
     }
     
-    /// After a cell get selected, show the details.
+    /// After a cell get selected, perform a segue and deselect the cell.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedRow = indexPath.row
         let cell: RandomUserTableViewCell = tableView.cell(at: indexPath)
         cell.userImage.heroID = HeroIDs.imageEnlarging.rawValue
         cell.userName.heroID = HeroIDs.textEnlarging.rawValue
-        presenterProtocolToView?.showRandomUserDetailsController(selected: indexPath.row)
+        performSegue(withIdentifier: detailsSegue, sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -125,7 +130,7 @@ extension RandomUsersViewController {
     
     /// In the top right corner write out the number of the currently downloaded distinct named users.
     private func refreshUserCounter() {
-        let title = "Users: \(presenterProtocolToView?.numberOfDistinctNamedPeople ?? 0)"
+        let title = "Users: \(randomUsersPresenter.numberOfDistinctNamedPeople)"
         navigationItem.rightBarButtonItem = UIBarButtonItem
             .create(title: title, isEnabled: false)
     }
@@ -137,35 +142,31 @@ extension RandomUsersViewController {
         refreshControl.tintColor = .white
         refreshControl.addTarget(self, action: #selector(tableViewPullToRefresh), for: .valueChanged)
         tableView.refreshControl = refreshControl
-        tableView.backgroundView = activityIndicatorView
     }
     
-    private func stopAnimating() {
+    private func stopAnimating(completion: @escaping () -> () = { }) {
         refreshControl.endRefreshing()
-        activityIndicatorView.stopAnimating()
+        animationView.hide(1.0) { _ in
+            self.animationView.stop()
+            completion()
+        }
     }
 }
 
 // MARK: - RandomUserProtocol (reaction to the Presenter) part.
-extension RandomUsersViewController: ViewProtocolToPresenter {
+extension RandomUsersViewController: RandomUserViewProtocol {
     
-    /// Will be called if the refresh should be ended.
-    func stopRefreshing() {
-        stopAnimating()
-        tableView.reloadData()
-    }
-    
-    /// VIPER architecture.
-    func injectPresenter(_ presenterProtocolToView: PresenterProtocolToView) {
-        self.presenterProtocolToView = presenterProtocolToView
-        self.presenterProtocolToView?.getCachedUsers()
+    func injectPresenter(_ presenterProtocolToView: RandomUserPresenterProtocol) {
+        self.randomUsersPresenter = presenterProtocolToView
+        self.randomUsersPresenter.getCachedUsers()
     }
     
     /// After successfully filled the array of the data, stop the animation and animate the `UITableView`.
-    func didRandomUsersAvailable() {
-        stopAnimating()
-        tableView.animateUITableView {
-            self.presenterProtocolToView?.enableFetching()
+    func didRandomUsersAvailable(_ completion: @escaping () -> Void) {
+        stopAnimating {
+            self.tableView.animateUITableView {
+                completion()
+            }
         }
     }
     
@@ -179,6 +180,7 @@ extension RandomUsersViewController: ViewProtocolToPresenter {
     /// After an error occured, show it to the user.
     func didErrorOccuredWhileDownload(errorMessage: String) {
         stopAnimating()
+        
         let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)

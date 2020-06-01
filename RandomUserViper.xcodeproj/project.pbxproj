@@ -8,8 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		7C4B94FE24827C0E001FBBBA /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7C4B94FD24827C0E001FBBBA /* RealmSwift */; };
-		7C4B9500248281C0001FBBBA /* Persistable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B94FF248281C0001FBBBA /* Persistable.swift */; };
-		7C4B9502248297A4001FBBBA /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4B9501248297A4001FBBBA /* RealmHelper.swift */; };
+		7CA50D812485202400F99F6A /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7CA50D802485202400F99F6A /* Lottie */; };
+		7CA50D842485207000F99F6A /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 7CA50D832485207000F99F6A /* Moya */; };
+		7CA50D872485209B00F99F6A /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 7CA50D862485209B00F99F6A /* Nuke */; };
+		7CA50D8A2485298C00F99F6A /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 7CA50D892485298C00F99F6A /* SDWebImage */; };
+		7CA50D8D248529D700F99F6A /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 7CA50D8C248529D700F99F6A /* SkeletonView */; };
+		7CA50D962485481B00F99F6A /* ApiServiceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA50D922485481A00F99F6A /* ApiServiceProtocols.swift */; };
+		7CA50D972485481B00F99F6A /* ApiServiceMoya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA50D932485481A00F99F6A /* ApiServiceMoya.swift */; };
+		7CA50D982485481B00F99F6A /* ApiServiceAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA50D942485481A00F99F6A /* ApiServiceAlamofire.swift */; };
+		7CA50D992485481B00F99F6A /* ApiServiceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA50D952485481B00F99F6A /* ApiServiceContainer.swift */; };
+		7CA50D9F2485483400F99F6A /* ImageServiceKingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA50D9A2485483300F99F6A /* ImageServiceKingfisher.swift */; };
+		7CA50DA02485483400F99F6A /* ImageServiceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA50D9B2485483300F99F6A /* ImageServiceProtocols.swift */; };
+		7CA50DA12485483400F99F6A /* ImageServiceNuke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA50D9C2485483300F99F6A /* ImageServiceNuke.swift */; };
+		7CA50DA22485483400F99F6A /* ImageServiceSDWebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA50D9D2485483300F99F6A /* ImageServiceSDWebImage.swift */; };
+		7CA50DA32485483400F99F6A /* ImageServiceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA50D9E2485483300F99F6A /* ImageServiceContainer.swift */; };
+		7CA50DA72485484700F99F6A /* PersistenceServiceRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA50DA42485484700F99F6A /* PersistenceServiceRealm.swift */; };
+		7CA50DA82485484700F99F6A /* PersistenceServiceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA50DA52485484700F99F6A /* PersistenceServiceContainer.swift */; };
+		7CA50DA92485484700F99F6A /* PersistenceServiceProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA50DA62485484700F99F6A /* PersistenceServiceProtocols.swift */; };
+		7CA50DAB2485497700F99F6A /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA50DAA2485497700F99F6A /* UIImageView+Extensions.swift */; };
+		7CA50DAD2485498900F99F6A /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA50DAC2485498900F99F6A /* AnimationView.swift */; };
+		7CA50DAF2485499B00F99F6A /* TopLevel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA50DAE2485499B00F99F6A /* TopLevel+Extensions.swift */; };
 		7CD27D792471B58A00126B05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD27D782471B58A00126B05 /* AppDelegate.swift */; };
 		7CD27D7B2471B58A00126B05 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD27D7A2471B58A00126B05 /* SceneDelegate.swift */; };
 		7CD27D802471B58A00126B05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CD27D7E2471B58A00126B05 /* Main.storyboard */; };
@@ -43,8 +61,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7C4B94FF248281C0001FBBBA /* Persistable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistable.swift; sourceTree = "<group>"; };
-		7C4B9501248297A4001FBBBA /* RealmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
+		7CA50D922485481A00F99F6A /* ApiServiceProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiServiceProtocols.swift; sourceTree = "<group>"; };
+		7CA50D932485481A00F99F6A /* ApiServiceMoya.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiServiceMoya.swift; sourceTree = "<group>"; };
+		7CA50D942485481A00F99F6A /* ApiServiceAlamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiServiceAlamofire.swift; sourceTree = "<group>"; };
+		7CA50D952485481B00F99F6A /* ApiServiceContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiServiceContainer.swift; sourceTree = "<group>"; };
+		7CA50D9A2485483300F99F6A /* ImageServiceKingfisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageServiceKingfisher.swift; sourceTree = "<group>"; };
+		7CA50D9B2485483300F99F6A /* ImageServiceProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageServiceProtocols.swift; sourceTree = "<group>"; };
+		7CA50D9C2485483300F99F6A /* ImageServiceNuke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageServiceNuke.swift; sourceTree = "<group>"; };
+		7CA50D9D2485483300F99F6A /* ImageServiceSDWebImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageServiceSDWebImage.swift; sourceTree = "<group>"; };
+		7CA50D9E2485483300F99F6A /* ImageServiceContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageServiceContainer.swift; sourceTree = "<group>"; };
+		7CA50DA42485484700F99F6A /* PersistenceServiceRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceServiceRealm.swift; sourceTree = "<group>"; };
+		7CA50DA52485484700F99F6A /* PersistenceServiceContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceServiceContainer.swift; sourceTree = "<group>"; };
+		7CA50DA62485484700F99F6A /* PersistenceServiceProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceServiceProtocols.swift; sourceTree = "<group>"; };
+		7CA50DAA2485497700F99F6A /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		7CA50DAC2485498900F99F6A /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
+		7CA50DAE2485499B00F99F6A /* TopLevel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TopLevel+Extensions.swift"; sourceTree = "<group>"; };
 		7CD27D752471B58A00126B05 /* RandomUserViper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomUserViper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CD27D782471B58A00126B05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7CD27D7A2471B58A00126B05 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,9 +112,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CA50D812485202400F99F6A /* Lottie in Frameworks */,
 				7C4B94FE24827C0E001FBBBA /* RealmSwift in Frameworks */,
+				7CA50D8A2485298C00F99F6A /* SDWebImage in Frameworks */,
+				7CA50D872485209B00F99F6A /* Nuke in Frameworks */,
+				7CA50D842485207000F99F6A /* Moya in Frameworks */,
 				7CD27DB62471B86700126B05 /* Kingfisher in Frameworks */,
 				7CD27DEC2472025F00126B05 /* Hero in Frameworks */,
+				7CA50D8D248529D700F99F6A /* SkeletonView in Frameworks */,
 				7CD27DB32471B85100126B05 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,6 +127,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7CA50D8E248547E700F99F6A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7CA50D912485480700F99F6A /* ApiService */,
+				7CA50D90248547FC00F99F6A /* ImageService */,
+				7CA50D8F248547F300F99F6A /* PersistenceService */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		7CA50D8F248547F300F99F6A /* PersistenceService */ = {
+			isa = PBXGroup;
+			children = (
+				7CA50DA52485484700F99F6A /* PersistenceServiceContainer.swift */,
+				7CA50DA42485484700F99F6A /* PersistenceServiceRealm.swift */,
+				7CA50DA62485484700F99F6A /* PersistenceServiceProtocols.swift */,
+			);
+			path = PersistenceService;
+			sourceTree = "<group>";
+		};
+		7CA50D90248547FC00F99F6A /* ImageService */ = {
+			isa = PBXGroup;
+			children = (
+				7CA50D9E2485483300F99F6A /* ImageServiceContainer.swift */,
+				7CA50D9A2485483300F99F6A /* ImageServiceKingfisher.swift */,
+				7CA50D9C2485483300F99F6A /* ImageServiceNuke.swift */,
+				7CA50D9D2485483300F99F6A /* ImageServiceSDWebImage.swift */,
+				7CA50D9B2485483300F99F6A /* ImageServiceProtocols.swift */,
+			);
+			path = ImageService;
+			sourceTree = "<group>";
+		};
+		7CA50D912485480700F99F6A /* ApiService */ = {
+			isa = PBXGroup;
+			children = (
+				7CA50D952485481B00F99F6A /* ApiServiceContainer.swift */,
+				7CA50D942485481A00F99F6A /* ApiServiceAlamofire.swift */,
+				7CA50D932485481A00F99F6A /* ApiServiceMoya.swift */,
+				7CA50D922485481A00F99F6A /* ApiServiceProtocols.swift */,
+			);
+			path = ApiService;
+			sourceTree = "<group>";
+		};
 		7CD27D6C2471B58A00126B05 = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +245,7 @@
 		7CD27D942471B65000126B05 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				7CA50D8E248547E700F99F6A /* Services */,
 				7CD27D9F2471B70000126B05 /* RandomUsersInteractor.swift */,
 			);
 			path = Interactor;
@@ -175,7 +255,6 @@
 			isa = PBXGroup;
 			children = (
 				7CD27DA12471B70A00126B05 /* RandomUsersPresenter.swift */,
-				7C4B9501248297A4001FBBBA /* RealmHelper.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -183,15 +262,14 @@
 		7CD27D962471B65E00126B05 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				7CD27DB82471E2C700126B05 /* Location.swift */,
+				7CD27DB72471E2C600126B05 /* User.swift */,
 				7CD27DB92471E2C700126B05 /* Name.swift */,
 				7CD27DBA2471E2C800126B05 /* Picture.swift */,
 				7CD27DBD2471E2CB00126B05 /* RuntimeError.swift */,
-				7CD27DBC2471E2C900126B05 /* Street.swift */,
-				7CD27DB72471E2C600126B05 /* User.swift */,
 				7CD27DBB2471E2C900126B05 /* UserResult.swift */,
+				7CD27DB82471E2C700126B05 /* Location.swift */,
+				7CD27DBC2471E2C900126B05 /* Street.swift */,
 				7CD27DE82471E7D600126B05 /* ErrorTypes.swift */,
-				7C4B94FF248281C0001FBBBA /* Persistable.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -224,10 +302,13 @@
 			isa = PBXGroup;
 			children = (
 				7CD27DDA2471E48B00126B05 /* String+Extensions.swift */,
-				7CD27DDC2471E4A300126B05 /* UIActivityIndicatorView+Extensions.swift */,
-				7CD27DDE2471E4F600126B05 /* UIBarButtonItem+Extensions.swift */,
 				7CD27DE02471E54A00126B05 /* UITableView+Extensions.swift */,
 				7CD27DE42471E56700126B05 /* UIView+Extensions.swift */,
+				7CD27DDC2471E4A300126B05 /* UIActivityIndicatorView+Extensions.swift */,
+				7CD27DDE2471E4F600126B05 /* UIBarButtonItem+Extensions.swift */,
+				7CA50DAA2485497700F99F6A /* UIImageView+Extensions.swift */,
+				7CA50DAC2485498900F99F6A /* AnimationView.swift */,
+				7CA50DAE2485499B00F99F6A /* TopLevel+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -253,6 +334,11 @@
 				7CD27DB52471B86700126B05 /* Kingfisher */,
 				7CD27DEB2472025F00126B05 /* Hero */,
 				7C4B94FD24827C0E001FBBBA /* RealmSwift */,
+				7CA50D802485202400F99F6A /* Lottie */,
+				7CA50D832485207000F99F6A /* Moya */,
+				7CA50D862485209B00F99F6A /* Nuke */,
+				7CA50D892485298C00F99F6A /* SDWebImage */,
+				7CA50D8C248529D700F99F6A /* SkeletonView */,
 			);
 			productName = RandomUserViper;
 			productReference = 7CD27D752471B58A00126B05 /* RandomUserViper.app */;
@@ -287,6 +373,11 @@
 				7CD27DB42471B86700126B05 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				7CD27DEA2472025F00126B05 /* XCRemoteSwiftPackageReference "Hero" */,
 				7C4B94FC24827C0E001FBBBA /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				7CA50D7F2485202400F99F6A /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				7CA50D822485207000F99F6A /* XCRemoteSwiftPackageReference "Moya" */,
+				7CA50D852485209B00F99F6A /* XCRemoteSwiftPackageReference "Nuke" */,
+				7CA50D882485298C00F99F6A /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				7CA50D8B248529D700F99F6A /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			productRefGroup = 7CD27D762471B58A00126B05 /* Products */;
 			projectDirPath = "";
@@ -316,20 +407,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CD27DDF2471E4F600126B05 /* UIBarButtonItem+Extensions.swift in Sources */,
+				7CA50DA82485484700F99F6A /* PersistenceServiceContainer.swift in Sources */,
 				7CD27DE52471E56700126B05 /* UIView+Extensions.swift in Sources */,
+				7CA50DA92485484700F99F6A /* PersistenceServiceProtocols.swift in Sources */,
 				7CD27DDB2471E48B00126B05 /* String+Extensions.swift in Sources */,
+				7CA50DA12485483400F99F6A /* ImageServiceNuke.swift in Sources */,
 				7CD27DE92471E7D600126B05 /* ErrorTypes.swift in Sources */,
+				7CA50D982485481B00F99F6A /* ApiServiceAlamofire.swift in Sources */,
 				7CD27DE12471E54A00126B05 /* UITableView+Extensions.swift in Sources */,
+				7CA50DAD2485498900F99F6A /* AnimationView.swift in Sources */,
 				7CD27D792471B58A00126B05 /* AppDelegate.swift in Sources */,
 				7CD27DE72471E62600126B05 /* RandomUserTableViewCell.swift in Sources */,
 				7CD27DB02471B7B500126B05 /* RandomUserDetailsRouter.swift in Sources */,
+				7CA50D972485481B00F99F6A /* ApiServiceMoya.swift in Sources */,
 				7CD27DC02471E2CB00126B05 /* Name.swift in Sources */,
 				7CD27DC32471E2CB00126B05 /* Street.swift in Sources */,
+				7CA50DAF2485499B00F99F6A /* TopLevel+Extensions.swift in Sources */,
+				7CA50DAB2485497700F99F6A /* UIImageView+Extensions.swift in Sources */,
+				7CA50D9F2485483400F99F6A /* ImageServiceKingfisher.swift in Sources */,
 				7CD27DBE2471E2CB00126B05 /* User.swift in Sources */,
+				7CA50DA22485483400F99F6A /* ImageServiceSDWebImage.swift in Sources */,
 				7CD27DBF2471E2CB00126B05 /* Location.swift in Sources */,
+				7CA50DA02485483400F99F6A /* ImageServiceProtocols.swift in Sources */,
+				7CA50D962485481B00F99F6A /* ApiServiceProtocols.swift in Sources */,
+				7CA50DA72485484700F99F6A /* PersistenceServiceRealm.swift in Sources */,
 				7CD27DA62471B72500126B05 /* RandomUsersRouter.swift in Sources */,
+				7CA50DA32485483400F99F6A /* ImageServiceContainer.swift in Sources */,
 				7CD27DA02471B70000126B05 /* RandomUsersInteractor.swift in Sources */,
-				7C4B9500248281C0001FBBBA /* Persistable.swift in Sources */,
 				7CD27DDD2471E4A300126B05 /* UIActivityIndicatorView+Extensions.swift in Sources */,
 				7CD27D9E2471B6CB00126B05 /* RandomUsersViewController.swift in Sources */,
 				7CD27DA22471B70A00126B05 /* RandomUsersPresenter.swift in Sources */,
@@ -340,7 +444,7 @@
 				7CD27DC22471E2CB00126B05 /* UserResult.swift in Sources */,
 				7CD27DEE2472027900126B05 /* HeroIDs.swift in Sources */,
 				7CD27DC42471E2CB00126B05 /* RuntimeError.swift in Sources */,
-				7C4B9502248297A4001FBBBA /* RealmHelper.swift in Sources */,
+				7CA50D992485481B00F99F6A /* ApiServiceContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -548,6 +652,46 @@
 				minimumVersion = 5.0.1;
 			};
 		};
+		7CA50D7F2485202400F99F6A /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.8;
+			};
+		};
+		7CA50D822485207000F99F6A /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.0.0;
+			};
+		};
+		7CA50D852485209B00F99F6A /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+		7CA50D882485298C00F99F6A /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.0;
+			};
+		};
+		7CA50D8B248529D700F99F6A /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.7;
+			};
+		};
 		7CD27DB12471B85100126B05 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -579,6 +723,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7C4B94FC24827C0E001FBBBA /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
+		};
+		7CA50D802485202400F99F6A /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7CA50D7F2485202400F99F6A /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		7CA50D832485207000F99F6A /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7CA50D822485207000F99F6A /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		7CA50D862485209B00F99F6A /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7CA50D852485209B00F99F6A /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		7CA50D892485298C00F99F6A /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7CA50D882485298C00F99F6A /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		7CA50D8C248529D700F99F6A /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7CA50D8B248529D700F99F6A /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
 		};
 		7CD27DB22471B85100126B05 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

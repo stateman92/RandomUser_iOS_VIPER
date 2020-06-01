@@ -52,32 +52,30 @@ final class UserObject: Object {
 
 extension User: Persistable {
     
-    public init(managedObject: UserObject) {
-        gender = managedObject.gender
-        email = managedObject.email
-        phone = managedObject.phone
-        cell = managedObject.cell
-        
-        if let location = managedObject.location {
-            self.location = Location(managedObject: location)
+    /// Create the `struct` based on the `Object` from the database.
+    /// If the`Object` is `nil`, it should initialize the struct appropriately.
+    init(managedObject: UserObject? = nil) {
+        if let managedObject = managedObject {
+            gender = managedObject.gender
+            email = managedObject.email
+            phone = managedObject.phone
+            cell = managedObject.cell
+            location = Location(managedObject: managedObject.location)
+            name = Name(managedObject: managedObject.name)
+            picture = Picture(managedObject: managedObject.picture)
         } else {
-            self.location = Location.nil()
-        }
-        
-        if let name = managedObject.name {
-            self.name = Name(managedObject: name)
-        } else {
-            self.name = Name.nil()
-        }
-        
-        if let picture = managedObject.picture {
-            self.picture = Picture(managedObject: picture)
-        } else {
-            self.picture = Picture.nil()
+            gender = ""
+            email = ""
+            phone = ""
+            cell = ""
+            location = Location()
+            name = Name()
+            picture = Picture()
         }
     }
     
-    public func managedObject() -> UserObject {
+    /// Create the `Object` that will be stored in the database based on the `struct`.
+    func managedObject() -> UserObject {
         let user = UserObject()
         user.name = name.managedObject()
         user.picture = picture.managedObject()

@@ -14,4 +14,12 @@ extension String {
     static func getRandomString() -> String {
         return UUID().uuidString
     }
+    
+    var urlEscaped: String {
+        return addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+    }
+    
+    var utf8Encoded: Data {
+        return data(using: .utf8)!
+    }
 }

@@ -12,10 +12,6 @@ import RealmSwift
 struct Street: Codable {
     let name: String
     let number: Int
-    
-    static func `nil`() -> Street {
-        return Street(name: "", number: 0)
-    }
 }
 
 final class StreetObject: Object {
@@ -31,12 +27,20 @@ final class StreetObject: Object {
 
 extension Street: Persistable {
     
-    public init(managedObject: StreetObject) {
-        name = managedObject.name
-        number = managedObject.number
+    /// Create the `struct` based on the `Object` from the database.
+    /// If the`Object` is `nil`, it should initialize the struct appropriately.
+    init(managedObject: StreetObject? = nil) {
+        if let managedObject = managedObject {
+            name = managedObject.name
+            number = managedObject.number
+        } else {
+            name = ""
+            number = 0
+        }
     }
     
-    public func managedObject() -> StreetObject {
+    /// Create the `Object` that will be stored in the database based on the `struct`.
+    func managedObject() -> StreetObject {
         let street = StreetObject()
         street.name = name
         street.number = number

@@ -14,10 +14,6 @@ struct Location: Codable {
     let country: String
     let state: String
     let street: Street
-    
-    static func `nil`() -> Location {
-        return Location(city: "", country: "", state: "", street: Street.nil())
-    }
 }
 
 final class LocationObject: Object {
@@ -35,19 +31,24 @@ final class LocationObject: Object {
 
 extension Location: Persistable {
     
-    public init(managedObject: LocationObject) {
-        city = managedObject.city
-        country = managedObject.country
-        state = managedObject.state
-        
-        if let street = managedObject.street {
-            self.street = Street(managedObject: street)
+    /// Create the `struct` based on the `Object` from the database.
+    /// If the`Object` is `nil`, it should initialize the struct appropriately.
+    init(managedObject: LocationObject? = nil) {
+        if let managedObject = managedObject {
+            city = managedObject.city
+            country = managedObject.country
+            state = managedObject.state
+            street = Street(managedObject: managedObject.street)
         } else {
-            self.street = Street.nil()
+            city = ""
+            country = ""
+            state = ""
+            street = Street()
         }
     }
     
-    public func managedObject() -> LocationObject {
+    /// Create the `Object` that will be stored in the database based on the `struct`.
+    func managedObject() -> LocationObject {
         let location = LocationObject()
         location.city = city
         location.country = country

@@ -15,10 +15,6 @@ struct Picture: Codable {
     
     let large: String
     let medium: String
-    
-    static func `nil`() -> Picture {
-        return Picture(large: "", medium: "")
-    }
 }
 
 final class PictureObject: Object {
@@ -34,12 +30,20 @@ final class PictureObject: Object {
 
 extension Picture: Persistable {
     
-    public init(managedObject: PictureObject) {
-        large = managedObject.large
-        medium = managedObject.medium
+    /// Create the `struct` based on the `Object` from the database.
+    /// If the`Object` is `nil`, it should initialize the struct appropriately.
+    init(managedObject: PictureObject? = nil) {
+        if let managedObject = managedObject {
+            large = managedObject.large
+            medium = managedObject.medium
+        } else {
+            large = ""
+            medium = ""
+        }
     }
     
-    public func managedObject() -> PictureObject {
+    /// Create the `Object` that will be stored in the database based on the `struct`.
+    func managedObject() -> PictureObject {
         let picture = PictureObject()
         picture.large = large
         picture.medium = medium

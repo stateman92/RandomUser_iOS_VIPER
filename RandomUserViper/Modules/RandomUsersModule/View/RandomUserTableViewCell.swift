@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import Kingfisher
 
-// MARK: - The UITableViewCell part.
+// MARK: - The UITableViewCell base part.
 class RandomUserTableViewCell: UITableViewCell {
     
     /// The "content", also every visible things that the user wants to see.
@@ -19,6 +18,8 @@ class RandomUserTableViewCell: UITableViewCell {
     
     /// If the content not ready, shows a loading animation.
     var activityIndicatorView: UIActivityIndicatorView?
+    
+    private let imageServiceContainer: ImageServiceContainerProtocol = ImageServiceContainer()
     
     private var isAnimating: Bool {
         return activityIndicatorView?.isAnimating ?? false
@@ -37,11 +38,9 @@ extension RandomUserTableViewCell {
     }
     
     /// Shows the data of the user.
-    func configureData(withUser user: User?) {
-        guard let user = user else { return }
+    func configureData(withUser user: User) {
         userName?.text = user.fullName
-        userImage.kf.indicatorType = .activity
-        userImage.kf.setImage(with: URL(string: user.picture.large))
+        imageServiceContainer.load(url: user.picture.medium, into: userImage)
     }
     
     /// Shows the data that the user wants to see.

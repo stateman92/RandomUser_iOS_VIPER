@@ -17,9 +17,9 @@ class RandomUsersRouter: RouterProtocolToPresenter {
     /// Creates and sets up the RandomUsersModule.
     static func createModule() -> RandomUsersViewController {
         
-        let view = AppDelegate.mainStoryboard.instantiateViewController(withIdentifier: "RandomUsersViewController") as! ViewProtocolToPresenter
+        let view = AppDelegate.mainStoryboard.instantiateViewController(withIdentifier: "RandomUsersViewController") as! RandomUserViewProtocol
         
-        let presenter: PresenterProtocolToView & PresenterProtocolToInteractor = RandomUsersPresenter()
+        let presenter: RandomUserPresenterProtocol & PresenterProtocolToInteractor = RandomUsersPresenter()
         let interactor: InteractorProtocolToPresenter = RandomUsersInteractor()
         let router: RouterProtocolToPresenter = RandomUsersRouter()
         

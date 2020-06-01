@@ -8,15 +8,20 @@
 
 import UIKit
 
-// All of the RandomUsersModule's protocols.
+// MARK: - VIPER architecture's elements.
+
+
 
 // MARK: - Presenter needs to implement this (View use it).
-protocol PresenterProtocolToView {
+protocol RandomUserPresenterProtocol {
     
     /// VIPER architecture.
-    func injectView(_ viewProtocolToPresenter: ViewProtocolToPresenter)
+    func injectView(_ randomUserViewProtocol: RandomUserViewProtocol)
     func injectInteractor(_ interactorProtocolToPresenter: InteractorProtocolToPresenter)
     func injectRouter(_ routerProtocolToPresenter: RouterProtocolToPresenter)
+    
+    /// Show the details `UIViewController`.
+    func showRandomUserDetailsController(selected: Int)
     
     /// The so far fetched user data.
     var users: [User] { get set }
@@ -30,27 +35,23 @@ protocol PresenterProtocolToView {
     /// Fetch some random users.
     func getRandomUsers()
     
-    /// Load the previously cached users.
-    func getCachedUsers()
-    
     /// Fetch some new random users.
     func refresh(withDelay: Double)
     
-    /// Does not block fetch more. It is necessary because of the animations.
-    func enableFetching()
-    
-    /// Show the details `UIViewController`.
-    func showRandomUserDetailsController(selected: Int)
+    /// Retrieve the previously cached users.
+    func getCachedUsers()
 }
 
 // MARK: - View needs to implement this (Presenter use it).
-protocol ViewProtocolToPresenter {
+protocol RandomUserViewProtocol {
     
     /// VIPER architecture.
-    func injectPresenter(_ presenterProtocolToView: PresenterProtocolToView)
+    func injectPresenter(_ presenterProtocolToView: RandomUserPresenterProtocol)
     
     /// Will be called after it downloads data while previously it contains (locally) no data.
-    func didRandomUsersAvailable()
+    /// - Parameters:
+    ///   - completion: must be called after the view presented correctly.
+    func didRandomUsersAvailable(_ completion: @escaping () -> Void)
     
     /// Will be called if the refresh (download new users with new seed value) starts.
     func willRandomUsersRefresh()
@@ -59,10 +60,21 @@ protocol ViewProtocolToPresenter {
     func didEndRandomUsersPaging()
     
     /// Will be called if any error occured while the requests.
+    /// - Parameters:
+    ///   - errorMessage: the description of the error.
     func didErrorOccuredWhileDownload(errorMessage: String)
+}
+
+extension RandomUserViewProtocol {
     
-    /// Will be called if the refresh should be ended.
-    func stopRefreshing()
+    /// Will be called after it downloads data while previously it contains (locally) no data. It's the customization of the `RandomUserViewProtocol`'s `didRandomUsersAvailable(completion:)` method.
+    /// - Parameters:
+    ///   - completion: optional argument, by default it does nothing.
+    func didRandomUsersAvailable(_ completion: @escaping () -> Void = { }) {
+        didRandomUsersAvailable {
+            completion()
+        }
+    }
 }
 
 // MARK: - Router needs to implement this (Presenter use it).
@@ -93,17 +105,12 @@ protocol InteractorProtocolToPresenter {
     ///   - results: the number of results in a page.
     ///   - seed: the API use this to give some data. For the same seed, it gives back the same results.
     func getUsers(page: Int, results: Int, seed: String)
-}
-
-extension InteractorProtocolToPresenter {
     
-    /// The API URL (in `String`).
-    /// - Note:
-    /// The number in the `String` indicate the used version of the API.
-    /// With `1.3` it works fine, but maybe a newer version would break the implementation.
-    func getBaseApiUrl() -> String {
-        return "https://randomuser.me/api/1.3/"
-    }
+    /// Try to load the previously cached data.
+    func getCachedData()
+    
+    /// Delete the previously cached data.
+    func deleteCachedData()
 }
 
 // MARK: - Presenter needs to implement this (Interactor use it).
@@ -112,9 +119,9 @@ protocol PresenterProtocolToInteractor {
     /// Will be called if the fetch (after a new seed value) was successful.
     func didUserFetchSuccess(users: [User])
     
-    /// Will be called if the fetch (about paging) was successful.
-    func didUserPageSuccess(users: [User])
-    
     /// Will be called if any error occured while the requests.
     func didUserFetchFail(errorMessage: String)
+    
+    /// Will be called after the cache loaded.
+    func didCacheLoadFinished(_ result: Result<[User], ErrorTypes>)
 }

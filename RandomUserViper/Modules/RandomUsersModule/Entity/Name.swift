@@ -13,10 +13,6 @@ struct Name: Codable {
     let first: String
     let last: String
     let title: String
-    
-    static func `nil`() -> Name {
-        return Name(first: "", last: "", title: "")
-    }
 }
 
 final class NameObject: Object {
@@ -33,13 +29,22 @@ final class NameObject: Object {
 
 extension Name: Persistable {
     
-    public init(managedObject: NameObject) {
-        first = managedObject.first
-        last = managedObject.last
-        title = managedObject.title
+    /// Create the `struct` based on the `Object` from the database.
+    /// If the`Object` is `nil`, it should initialize the struct appropriately.
+    init(managedObject: NameObject? = nil) {
+        if let managedObject = managedObject {
+            first = managedObject.first
+            last = managedObject.last
+            title = managedObject.title
+        } else {
+            first = ""
+            last = ""
+            title = ""
+        }
     }
     
-    public func managedObject() -> NameObject {
+    /// Create the `Object` that will be stored in the database based on the `struct`.
+    func managedObject() -> NameObject {
         let name = NameObject()
         name.first = first
         name.last = last

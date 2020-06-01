@@ -15,6 +15,8 @@ class RandomUsersInteractor: InteractorProtocolToPresenter {
     
     /// VIPER architecture element (Presenter).
     private var presenterProtocolToInteractor: PresenterProtocolToInteractor?
+    private var apiServiceContainer: ApiServiceContainerProtocol
+    private var persistenceServiceContainer: PersistenceServiceContainerProtocol
     
     /// If fetch is in progress, no more network request will be executed.
     var isFetching = false
@@ -24,47 +26,45 @@ class RandomUsersInteractor: InteractorProtocolToPresenter {
         self.presenterProtocolToInteractor = presenterProtocolToInteractor
     }
     
+    /// Dependency Injection via Constructor Injection.
+    init(_ apiServiceType: ApiServiceContainer.USType = .alamofire, _ persistenceServiceType: PersistenceServiceContainer.PSType = .realm) {
+        self.apiServiceContainer = ApiServiceContainer.init(apiServiceType)
+        self.persistenceServiceContainer = PersistenceServiceContainer.init(persistenceServiceType)
+    }
+    
     func getUsers(page: Int, results: Int, seed: String) {
-        guard let url = createUrl(page, results, seed) else {
-            self.presenterProtocolToInteractor?.didUserFetchFail(errorMessage: errorTypes.cannotBeReached.rawValue)
-            return
-        }
         guard isFetching == false else { return }
         isFetching = true
-        AF.request(url).responseJSON { response in
-            do {
-                if response.error != nil || response.response?.statusCode == nil {
-                    throw RuntimeError(response.error?.localizedDescription ?? errorTypes.wrongRequest.rawValue)
-                } else if response.response!.statusCode < 400 {
-                    let userResult = try JSONDecoder().decode(UserResult.self, from: response.data!)
-                    if page != 1 {
-                        self.presenterProtocolToInteractor?.didUserPageSuccess(users: userResult.results)
-                        self.isFetching = false
-                    } else {
-                        self.presenterProtocolToInteractor?.didUserFetchSuccess(users: userResult.results)
-                    }
-                } else {
-                    throw RuntimeError(errorTypes.unexpectedError.rawValue)
-                }
-            } catch let error {
-                self.presenterProtocolToInteractor?.didUserFetchFail(errorMessage: error.localizedDescription)
+        
+        apiServiceContainer.getUsers(page: page, results: results, seed: seed) { result in
+            switch result {
+            case .success(let users):
+                self.persistenceServiceContainer.add(users)
+                self.presenterProtocolToInteractor?.didUserFetchSuccess(users: users)
+            case .failure(let errorType):
+                self.presenterProtocolToInteractor?.didUserFetchFail(errorMessage: errorType.rawValue)
                 self.isFetching = false
             }
         }
     }
     
-    /// Creates an `URL` with the given query parameters.
-    /// - Note:
-    /// The `URL` stores that too, that which data will be requested.
-    /// The result of this method request from the API the `name`, `picture`, `gender`, `location`, `email`, `phone` and `cell`.
-    private func createUrl(_ page: Int, _ results: Int, _ seed: String) -> URL? {
-        let queryItems = [URLQueryItem(name: "inc", value: "name,picture,gender,location,email,phone,cell"),
-                          URLQueryItem(name: "page", value: String(page)),
-                          URLQueryItem(name: "results", value: String(results)),
-                          URLQueryItem(name: "seed", value: String(seed))]
-        guard var urlComps = URLComponents(string: getBaseApiUrl()) else { return nil }
-        urlComps.queryItems = queryItems
-        guard let url = urlComps.url else { return nil }
-        return url
+    /// Try to load the previously cached data.
+    func getCachedData() {
+        isFetching = true
+        var returnUsers = [User]()
+        let users = persistenceServiceContainer.objects(UserObject.self)
+        for user in users {
+            returnUsers.append(User(managedObject: user))
+        }
+        if returnUsers.count == 0 {
+            self.presenterProtocolToInteractor?.didCacheLoadFinished(.failure(.unexpectedError))
+        } else {
+            self.presenterProtocolToInteractor?.didCacheLoadFinished(.success(returnUsers))
+        }
+    }
+    
+    /// Delete the previously cached data.
+    func deleteCachedData() {
+        persistenceServiceContainer.deleteAndAdd(UserObject.self, [User]())
     }
 }

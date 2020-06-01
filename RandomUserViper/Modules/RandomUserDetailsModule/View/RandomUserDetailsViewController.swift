@@ -7,12 +7,13 @@
 //
 
 import UIKit
-import Kingfisher
+import SkeletonView
 
-// MARK: - The View base part.
+// MARK: - The main ViewController base part.
 class RandomUserDetailsViewController: UIViewController {
     
     var user: User!
+    private let imageServiceContainer: ImageServiceContainerProtocol = ImageServiceContainer()
     
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var userAccessibilitiesLabel: UILabel!
@@ -24,6 +25,9 @@ extension RandomUserDetailsViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.isSkeletonable = true
+        userImageView.isSkeletonable = true
         
         navigationItem.title = "\(user.fullName) (\(user.gender))"
         fillLayoutWithData()
@@ -37,9 +41,16 @@ extension RandomUserDetailsViewController {
 extension RandomUserDetailsViewController {
     
     private func fillLayoutWithData() {
-        userImageView.kf.indicatorType = .activity
-        userImageView.kf.setImage(with: URL(string: user.picture.large))
         userAccessibilitiesLabel.text = user.accessibilities
         userLocationLabel.text = user.expandedLocation
+        userImageView.backgroundColor = .darkGray
+        
+        // The placeholder will be a SkeletonView, something like Facebook.
+        let gradient = SkeletonGradient(baseColor: .darkGray)
+        userImageView.showAnimatedGradientSkeleton(usingGradient: gradient, transition: .crossDissolve(1))
+        
+        imageServiceContainer.load(url: user.picture.large, into: userImageView, withDelay: 2.0) {
+            self.userImageView.hideSkeleton()
+        }
     }
 }
