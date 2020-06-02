@@ -59,8 +59,10 @@ extension ImageServiceContainer: ImageServiceContainerProtocol {
         
         guard let url = URL(string: urlString) else { return }
         
-        run(delay) {
-            self.service.load(url: url, into: imageView) {
+        run(delay) { [weak self] in
+            guard let self = self else { return }
+            self.service.load(url: url, into: imageView) { [weak self] in
+                guard let self = self else { return }
                 self.loaded(activityIndicator, completionHandler)
             }
         }

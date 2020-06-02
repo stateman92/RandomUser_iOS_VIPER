@@ -14,7 +14,7 @@ import Alamofire
 class RandomUsersInteractor: InteractorProtocolToPresenter {
     
     /// VIPER architecture element (Presenter).
-    private var presenterProtocolToInteractor: PresenterProtocolToInteractor?
+    private weak var presenterProtocolToInteractor: PresenterProtocolToInteractor?
     private var apiServiceContainer: ApiServiceContainerProtocol
     private var persistenceServiceContainer: PersistenceServiceContainerProtocol
     
@@ -36,7 +36,8 @@ class RandomUsersInteractor: InteractorProtocolToPresenter {
         guard isFetching == false else { return }
         isFetching = true
         
-        apiServiceContainer.getUsers(page: page, results: results, seed: seed) { result in
+        apiServiceContainer.getUsers(page: page, results: results, seed: seed) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let users):
                 self.persistenceServiceContainer.add(users)
@@ -57,9 +58,9 @@ class RandomUsersInteractor: InteractorProtocolToPresenter {
             returnUsers.append(User(managedObject: user))
         }
         if returnUsers.count == 0 {
-            self.presenterProtocolToInteractor?.didCacheLoadFinished(.failure(.unexpectedError))
+            presenterProtocolToInteractor?.didCacheLoadFinished(.failure(.unexpectedError))
         } else {
-            self.presenterProtocolToInteractor?.didCacheLoadFinished(.success(returnUsers))
+            presenterProtocolToInteractor?.didCacheLoadFinished(.success(returnUsers))
         }
     }
     

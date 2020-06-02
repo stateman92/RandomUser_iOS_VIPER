@@ -13,7 +13,7 @@ import RealmSwift
 class RandomUsersPresenter {
     
     /// VIPER architecture elements.
-    private var randomUserViewProtocol: RandomUserViewProtocol?
+    private weak var randomUserViewProtocol: RandomUserViewProtocol?
     private var interactorProtocolToPresenter: InteractorProtocolToPresenter?
     private var routerProtocolToPresenter: RouterProtocolToPresenter?
     
@@ -39,7 +39,8 @@ extension RandomUsersPresenter: PresenterProtocolToInteractor {
     func didUserFetchSuccess(users: [User]) {
         self.users.append(contentsOf: users)
         if users.count == numberOfUsersPerPage {
-            randomUserViewProtocol?.didRandomUsersAvailable {
+            randomUserViewProtocol?.didRandomUsersAvailable { [weak self] in
+                guard let self = self else { return }
                 self.interactorProtocolToPresenter?.isFetching = false
             }
         } else {
@@ -57,7 +58,8 @@ extension RandomUsersPresenter: PresenterProtocolToInteractor {
         switch result {
         case .success(let users):
             self.users.append(contentsOf: users)
-            randomUserViewProtocol?.didRandomUsersAvailable {
+            randomUserViewProtocol?.didRandomUsersAvailable { [weak self] in
+                guard let self = self else { return }
                 self.interactorProtocolToPresenter?.isFetching = false
             }
         case .failure(_):
@@ -119,10 +121,11 @@ extension RandomUsersPresenter: RandomUserPresenterProtocol {
     ///   - withDelay: the duration after the fetch starts.
     func refresh(withDelay delay: Double = 0) {
         users.removeAll()
-        self.interactorProtocolToPresenter?.deleteCachedData()
+        interactorProtocolToPresenter?.deleteCachedData()
         seed = String.getRandomString()
         randomUserViewProtocol?.willRandomUsersRefresh()
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+        run(delay) { [weak self] in
+            guard let self = self else { return }
             self.getRandomUsers()
         }
     }
@@ -130,7 +133,8 @@ extension RandomUsersPresenter: RandomUserPresenterProtocol {
     /// Retrieve the previously cached users.
     func getCachedUsers() {
         interactorProtocolToPresenter?.isFetching = true
-        run(1.0) {
+        run(1.0) { [weak self] in
+            guard let self = self else { return }
             self.interactorProtocolToPresenter?.getCachedData()
         }
     }

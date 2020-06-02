@@ -143,7 +143,8 @@ extension RandomUsersViewController {
     
     private func stopAnimating(completion: @escaping () -> () = { }) {
         refreshControl.endRefreshing()
-        animationView.hide(1.0) { _ in
+        animationView.hide(1.0) {  [weak self] _ in
+            guard let self = self else { return }
             self.animationView.stop()
             completion()
         }
@@ -160,7 +161,8 @@ extension RandomUsersViewController: RandomUserViewProtocol {
     
     /// After successfully filled the array of the data, stop the animation and animate the `UITableView`.
     func didRandomUsersAvailable(_ completion: @escaping () -> Void) {
-        stopAnimating {
+        stopAnimating { [weak self] in
+            guard let self = self else { return }
             self.tableView.animateUITableView {
                 completion()
             }
@@ -169,7 +171,8 @@ extension RandomUsersViewController: RandomUserViewProtocol {
     
     /// After started the refresh, hide the cells.
     func willRandomUsersRefresh() {
-        UIView.transition(with: tableView, duration: refreshDelay, options: .transitionCrossDissolve, animations: {
+        UIView.transition(with: tableView, duration: refreshDelay, options: .transitionCrossDissolve, animations: { [weak self] in
+            guard let self = self else { return }
             self.tableView.reloadData()
         })
     }

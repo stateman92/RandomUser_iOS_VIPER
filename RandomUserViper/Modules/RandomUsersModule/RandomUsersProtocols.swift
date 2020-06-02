@@ -43,7 +43,7 @@ protocol RandomUserPresenterProtocol {
 }
 
 // MARK: - View needs to implement this (Presenter use it).
-protocol RandomUserViewProtocol {
+protocol RandomUserViewProtocol: class {
     
     /// VIPER architecture.
     func injectPresenter(_ presenterProtocolToView: RandomUserPresenterProtocol)
@@ -114,7 +114,7 @@ protocol InteractorProtocolToPresenter {
 }
 
 // MARK: - Presenter needs to implement this (Interactor use it).
-protocol PresenterProtocolToInteractor {
+protocol PresenterProtocolToInteractor: class {
     
     /// Will be called if the fetch (after a new seed value) was successful.
     func didUserFetchSuccess(users: [User])

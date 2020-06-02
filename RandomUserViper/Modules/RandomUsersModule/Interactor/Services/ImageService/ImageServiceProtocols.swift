@@ -42,4 +42,3 @@ protocol ImageServiceProtocol {
     ///   - completionHandler: will be called after the image loaded.
     func load(url: URL, into imageView: UIImageView, completionHandler: @escaping () -> ())
 }
-
