@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7C4B94FE24827C0E001FBBBA /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7C4B94FD24827C0E001FBBBA /* RealmSwift */; };
+		7C23D77224892A3200BA6675 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7C23D77124892A3200BA6675 /* RealmSwift */; };
 		7CA50D812485202400F99F6A /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7CA50D802485202400F99F6A /* Lottie */; };
 		7CA50D842485207000F99F6A /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 7CA50D832485207000F99F6A /* Moya */; };
 		7CA50D872485209B00F99F6A /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 7CA50D862485209B00F99F6A /* Nuke */; };
@@ -115,9 +115,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CA50D812485202400F99F6A /* Lottie in Frameworks */,
-				7C4B94FE24827C0E001FBBBA /* RealmSwift in Frameworks */,
 				7CA50D8A2485298C00F99F6A /* SDWebImage in Frameworks */,
 				7CA50D872485209B00F99F6A /* Nuke in Frameworks */,
+				7C23D77224892A3200BA6675 /* RealmSwift in Frameworks */,
 				7CA50D842485207000F99F6A /* Moya in Frameworks */,
 				7CD27DB62471B86700126B05 /* Kingfisher in Frameworks */,
 				7CD27DEC2472025F00126B05 /* Hero in Frameworks */,
@@ -336,12 +336,12 @@
 				7CD27DB22471B85100126B05 /* Alamofire */,
 				7CD27DB52471B86700126B05 /* Kingfisher */,
 				7CD27DEB2472025F00126B05 /* Hero */,
-				7C4B94FD24827C0E001FBBBA /* RealmSwift */,
 				7CA50D802485202400F99F6A /* Lottie */,
 				7CA50D832485207000F99F6A /* Moya */,
 				7CA50D862485209B00F99F6A /* Nuke */,
 				7CA50D892485298C00F99F6A /* SDWebImage */,
 				7CA50D8C248529D700F99F6A /* SkeletonView */,
+				7C23D77124892A3200BA6675 /* RealmSwift */,
 			);
 			productName = RandomUserViper;
 			productReference = 7CD27D752471B58A00126B05 /* RandomUserViper.app */;
@@ -375,12 +375,12 @@
 				7CD27DB12471B85100126B05 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				7CD27DB42471B86700126B05 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				7CD27DEA2472025F00126B05 /* XCRemoteSwiftPackageReference "Hero" */,
-				7C4B94FC24827C0E001FBBBA /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				7CA50D7F2485202400F99F6A /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				7CA50D822485207000F99F6A /* XCRemoteSwiftPackageReference "Moya" */,
 				7CA50D852485209B00F99F6A /* XCRemoteSwiftPackageReference "Nuke" */,
 				7CA50D882485298C00F99F6A /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				7CA50D8B248529D700F99F6A /* XCRemoteSwiftPackageReference "SkeletonView" */,
+				7C23D77024892A3200BA6675 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = 7CD27D762471B58A00126B05 /* Products */;
 			projectDirPath = "";
@@ -648,12 +648,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		7C4B94FC24827C0E001FBBBA /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+		7C23D77024892A3200BA6675 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.1;
+				minimumVersion = 5.0.2;
 			};
 		};
 		7CA50D7F2485202400F99F6A /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
@@ -723,9 +723,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		7C4B94FD24827C0E001FBBBA /* RealmSwift */ = {
+		7C23D77124892A3200BA6675 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7C4B94FC24827C0E001FBBBA /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			package = 7C23D77024892A3200BA6675 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
 		};
 		7CA50D802485202400F99F6A /* Lottie */ = {

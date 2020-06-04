@@ -38,13 +38,14 @@ extension RandomUsersPresenter: PresenterProtocolToInteractor {
     /// Will be called if (after a new seed value) the fetch was successful.
     func didUserFetchSuccess(users: [User]) {
         self.users.append(contentsOf: users)
-        if users.count == numberOfUsersPerPage {
+        if self.users.count == numberOfUsersPerPage {
             randomUserViewProtocol?.didRandomUsersAvailable { [weak self] in
                 guard let self = self else { return }
                 self.interactorProtocolToPresenter?.isFetching = false
             }
         } else {
             randomUserViewProtocol?.didEndRandomUsersPaging()
+            interactorProtocolToPresenter?.isFetching = false
         }
     }
     
