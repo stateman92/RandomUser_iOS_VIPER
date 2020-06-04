@@ -8,8 +8,8 @@
 
 import RealmSwift
 
-// MARK: - PersistenceService Container part.
-protocol PersistenceServiceContainerProtocol {
+// MARK: - PersistenceService part.
+protocol PersistenceServiceProtocol {
     
     /// Store a `Persistable` struct into a database.
     func add<T: Persistable>(_ value: T)
@@ -24,29 +24,13 @@ protocol PersistenceServiceContainerProtocol {
     func objects<Element: Object>(_ type: Element.Type) -> Results<Element>
 }
 
-extension PersistenceServiceContainerProtocol {
+extension PersistenceServiceProtocol {
     
     /// Delete the `Object` Element from the database and `Persistable` structs into a database.
     func deleteAndAdd<Element: Object, T: Sequence>(_ type: Element.Type, _ sequence: T) where T.Element: Persistable {
         delete(objects(type))
         add(sequence)
     }
-}
-
-// MARK: - PersistenceService part.
-protocol PersistenceServiceProtocol {
-    
-    /// Store a `Persistable` struct into a database.
-    func add<T: Persistable>(_ value: T) throws
-    
-    /// Store some `Persistable` structs into a database.
-    func add<T: Sequence>(_ sequence: T) throws where T.Element: Persistable
-    
-    /// Delete the `Object` Element from the database.
-    func delete<Element: Object>(_ objects: Results<Element>) throws
-    
-    /// Retrieve the `Object` Element from the database.
-    func objects<Element: Object>(_ type: Element.Type) throws -> Results<Element>
 }
 
 // MARK: - Persistable part.

@@ -8,8 +8,8 @@
 
 import UIKit
 
-// MARK: - ImageService Container part.
-protocol ImageServiceContainerProtocol {
+// MARK: - ImageService part.
+protocol ImageServiceProtocol {
     
     /// Load an url into the image.
     /// - Parameters:
@@ -20,7 +20,8 @@ protocol ImageServiceContainerProtocol {
     ///   - completionHandler: will be called after the image loaded.
     func load(url urlString: String, into imageView: UIImageView, withDelay delay: Double, isLoadingPresenting loading: Bool, completionHandler: @escaping () -> Void)
 }
-extension ImageServiceContainerProtocol {
+
+extension ImageServiceProtocol {
     
     /// Load an url into the image. It's the customization of the `ImageServiceContainerProtocol`'s `load(url:into:withdelay:isloadingPresenting:completionHandler:)` method.
     /// - Parameters:
@@ -30,15 +31,4 @@ extension ImageServiceContainerProtocol {
     func load(url urlString: String, into imageView: UIImageView, withDelay delay: Double = 0.0, isLoadingPresenting loading: Bool = false, completionHandler: @escaping () -> Void = { }) {
         load(url: urlString, into: imageView, withDelay: delay, isLoadingPresenting: loading, completionHandler: completionHandler)
     }
-}
-
-// MARK: - ImageService part.
-protocol ImageServiceProtocol {
-    
-    /// Load an url into the image.
-    /// - Parameters:
-    ///   - url: the url in `URL` format of the image.
-    ///   - into: the `UIImageView` that will hold the image.
-    ///   - completionHandler: will be called after the image loaded.
-    func load(url: URL, into imageView: UIImageView, completionHandler: @escaping () -> ())
 }

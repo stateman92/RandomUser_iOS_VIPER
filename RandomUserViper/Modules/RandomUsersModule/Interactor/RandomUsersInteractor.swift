@@ -15,8 +15,8 @@ class RandomUsersInteractor: InteractorProtocolToPresenter {
     
     /// VIPER architecture element (Presenter).
     private weak var presenterProtocolToInteractor: PresenterProtocolToInteractor?
-    private var apiServiceContainer: ApiServiceContainerProtocol
-    private var persistenceServiceContainer: PersistenceServiceContainerProtocol
+    private var apiService: ApiServiceProtocol
+    private var persistenceService: PersistenceServiceProtocol
     
     /// If fetch is in progress, no more network request will be executed.
     var isFetching = false
@@ -28,19 +28,19 @@ class RandomUsersInteractor: InteractorProtocolToPresenter {
     
     /// Dependency Injection via Constructor Injection.
     init(_ apiServiceType: ApiServiceContainer.USType = .alamofire, _ persistenceServiceType: PersistenceServiceContainer.PSType = .realm) {
-        self.apiServiceContainer = ApiServiceContainer.init(apiServiceType)
-        self.persistenceServiceContainer = PersistenceServiceContainer.init(persistenceServiceType)
+        self.apiService = ApiServiceContainer.init(apiServiceType).service
+        self.persistenceService = PersistenceServiceContainer.init(persistenceServiceType).service
     }
     
     func getUsers(page: Int, results: Int, seed: String) {
         guard isFetching == false else { return }
         isFetching = true
         
-        apiServiceContainer.getUsers(page: page, results: results, seed: seed) { [weak self] result in
+        apiService.getUsers(page: page, results: results, seed: seed) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let users):
-                self.persistenceServiceContainer.add(users)
+                self.persistenceService.add(users)
                 self.presenterProtocolToInteractor?.didUserFetchSuccess(users: users)
             case .failure(let errorType):
                 self.presenterProtocolToInteractor?.didUserFetchFail(errorMessage: errorType.rawValue)
@@ -53,7 +53,7 @@ class RandomUsersInteractor: InteractorProtocolToPresenter {
     func getCachedData() {
         isFetching = true
         var returnUsers = [User]()
-        let users = persistenceServiceContainer.objects(UserObject.self)
+        let users = persistenceService.objects(UserObject.self)
         for user in users {
             returnUsers.append(User(managedObject: user))
         }
@@ -66,6 +66,6 @@ class RandomUsersInteractor: InteractorProtocolToPresenter {
     
     /// Delete the previously cached data.
     func deleteCachedData() {
-        persistenceServiceContainer.deleteAndAdd(UserObject.self, [User]())
+        persistenceService.deleteAndAdd(UserObject.self, [User]())
     }
 }
