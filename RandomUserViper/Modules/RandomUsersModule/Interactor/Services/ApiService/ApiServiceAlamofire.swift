@@ -24,16 +24,15 @@ class ApiServiceAlamofire: ApiServiceProtocol {
             return
         }
         AF.request(url).responseJSON { response in
-            do {
-                if response.error != nil || response.response?.statusCode == nil {
-                    completion(.failure(.wrongRequest))
-                } else if response.response!.statusCode < 400 {
-                    let userResult = try JSONDecoder().decode(UserResult.self, from: response.data!)
-                    completion(.success(userResult.results))
-                } else {
+            if response.error != nil || response.response?.statusCode == nil {
+                completion(.failure(.wrongRequest))
+            } else if response.response!.statusCode < 400 {
+                guard let userResult = UserResult(data: response.data) else {
                     completion(.failure(.unexpectedError))
+                    return
                 }
-            } catch {
+                completion(.success(userResult.results))
+            } else {
                 completion(.failure(.unexpectedError))
             }
         }

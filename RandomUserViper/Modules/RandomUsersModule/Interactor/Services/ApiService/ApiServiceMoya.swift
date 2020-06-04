@@ -74,15 +74,14 @@ class ApiServiceMoya: ApiServiceProtocol {
         // let provider = MoyaProvider<MoyaEnums>(plugins: [NetworkLoggerPlugin()])
         let provider = MoyaProvider<MoyaEnums>()
         provider.request(.randomUsers(page: page, results: results, seed: seed)) { result in
-            do {
-                switch result {
-                case let .success(moyaResponse):
-                    let userResult = try JSONDecoder().decode(UserResult.self, from: moyaResponse.data)
-                    completion(.success(userResult.results))
-                case .failure(_):
+            switch result {
+            case let .success(moyaResponse):
+                guard let userResult = UserResult(data: moyaResponse.data) else {
                     completion(.failure(.unexpectedError))
+                    return
                 }
-            } catch {
+                completion(.success(userResult.results))
+            case .failure(_):
                 completion(.failure(.unexpectedError))
             }
         }
