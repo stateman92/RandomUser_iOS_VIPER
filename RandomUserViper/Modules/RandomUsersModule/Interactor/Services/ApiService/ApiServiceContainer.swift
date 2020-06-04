@@ -19,7 +19,7 @@ class ApiServiceContainer {
     
     let service: ApiServiceProtocol
     
-    init(_ usType: USType) {
+    init(_ usType: USType = .alamofire) {
         switch usType {
         case .alamofire:
             service = ApiServiceAlamofire()
