@@ -29,6 +29,7 @@
 		7CA50DAD2485498900F99F6A /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA50DAC2485498900F99F6A /* AnimationView.swift */; };
 		7CA50DAF2485499B00F99F6A /* TopLevel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA50DAE2485499B00F99F6A /* TopLevel+Extensions.swift */; };
 		7CA50DB12485719000F99F6A /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CA50DB02485719000F99F6A /* loading.json */; };
+		7CD20047248AC505005A4A71 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 7CD20046248AC505005A4A71 /* Swinject */; };
 		7CD27D792471B58A00126B05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD27D782471B58A00126B05 /* AppDelegate.swift */; };
 		7CD27D7B2471B58A00126B05 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD27D7A2471B58A00126B05 /* SceneDelegate.swift */; };
 		7CD27D802471B58A00126B05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CD27D7E2471B58A00126B05 /* Main.storyboard */; };
@@ -115,6 +116,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CA50D812485202400F99F6A /* Lottie in Frameworks */,
+				7CD20047248AC505005A4A71 /* Swinject in Frameworks */,
 				7CA50D8A2485298C00F99F6A /* SDWebImage in Frameworks */,
 				7CA50D872485209B00F99F6A /* Nuke in Frameworks */,
 				7C23D77224892A3200BA6675 /* RealmSwift in Frameworks */,
@@ -342,6 +344,7 @@
 				7CA50D892485298C00F99F6A /* SDWebImage */,
 				7CA50D8C248529D700F99F6A /* SkeletonView */,
 				7C23D77124892A3200BA6675 /* RealmSwift */,
+				7CD20046248AC505005A4A71 /* Swinject */,
 			);
 			productName = RandomUserViper;
 			productReference = 7CD27D752471B58A00126B05 /* RandomUserViper.app */;
@@ -381,6 +384,7 @@
 				7CA50D882485298C00F99F6A /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				7CA50D8B248529D700F99F6A /* XCRemoteSwiftPackageReference "SkeletonView" */,
 				7C23D77024892A3200BA6675 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				7CD20045248AC504005A4A71 /* XCRemoteSwiftPackageReference "Swinject" */,
 			);
 			productRefGroup = 7CD27D762471B58A00126B05 /* Products */;
 			projectDirPath = "";
@@ -696,6 +700,14 @@
 				minimumVersion = 1.8.7;
 			};
 		};
+		7CD20045248AC504005A4A71 /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.1;
+			};
+		};
 		7CD27DB12471B85100126B05 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -752,6 +764,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7CA50D8B248529D700F99F6A /* XCRemoteSwiftPackageReference "SkeletonView" */;
 			productName = SkeletonView;
+		};
+		7CD20046248AC505005A4A71 /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7CD20045248AC504005A4A71 /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
 		};
 		7CD27DB22471B85100126B05 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

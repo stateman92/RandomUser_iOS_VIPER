@@ -27,8 +27,8 @@ class RandomUsersInteractor: InteractorProtocolToPresenter {
     }
     
     /// Dependency Injection via Constructor Injection.
-    init(_ apiServiceType: ApiServiceContainer.USType = .alamofire, _ persistenceServiceType: PersistenceServiceContainer.PSType = .realm) {
-        self.apiService = ApiServiceContainer.init(apiServiceType).service
+    init(_ persistenceServiceType: PersistenceServiceContainer.PSType = .realm) {
+        apiService = AppDelegate.container.resolve(ApiServiceProtocol.self)!
         self.persistenceService = PersistenceServiceContainer.init(persistenceServiceType).service
     }
     
