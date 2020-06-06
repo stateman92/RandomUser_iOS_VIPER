@@ -14,23 +14,23 @@ extension UIView {
     /// - Parameters:
     ///   - seconds: the duration of the animation (default `0.0`).
     ///   - completion: will be called after the animation ended.
-    func hide(_ seconds: Double = 0.0, completion: @escaping (Bool) -> () = { success in }) {
+    func hide(_ seconds: Double = 0.0, completion: @escaping () -> () = { }) {
         UIView.animate(withDuration: seconds, animations: {
             self.alpha = 0.0
-        }, completion: { success in
-            completion(success)
-        })
+        }) { success in
+            completion()
+        }
     }
     
     /// Shows the `UIView` with the change of its `alpha` value.
     /// - Parameters:
     ///   - seconds: the duration of the animation (default `0.0`).
     ///   - completion: will be called after the animation ended.
-    func show(_ seconds: Double = 0.0, completion: @escaping (Bool) -> () = { success in }) {
+    func show(_ seconds: Double = 0.0, completion: @escaping () -> () = { }) {
         UIView.animate(withDuration: seconds, animations: {
             self.alpha = 1.0
-        }, completion: { success in
-            completion(success)
-        })
+        }) { success in
+            completion()
+        }
     }
 }
