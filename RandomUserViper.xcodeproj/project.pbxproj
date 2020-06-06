@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7C0B50B5248BD5250072C4B4 /* ImageServiceAlamofireImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0B50B4248BD5250072C4B4 /* ImageServiceAlamofireImage.swift */; };
 		7C0B50B8248BD5A60072C4B4 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = 7C0B50B7248BD5A60072C4B4 /* AlamofireImage */; };
+		7C0B50BF248BFB800072C4B4 /* ApiServiceJust.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0B50BE248BFB800072C4B4 /* ApiServiceJust.swift */; };
+		7C0B50C2248BFBBF0072C4B4 /* Just in Frameworks */ = {isa = PBXBuildFile; productRef = 7C0B50C1248BFBBF0072C4B4 /* Just */; };
 		7C23D77224892A3200BA6675 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7C23D77124892A3200BA6675 /* RealmSwift */; };
 		7CA50D812485202400F99F6A /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7CA50D802485202400F99F6A /* Lottie */; };
 		7CA50D842485207000F99F6A /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 7CA50D832485207000F99F6A /* Moya */; };
@@ -66,6 +68,7 @@
 
 /* Begin PBXFileReference section */
 		7C0B50B4248BD5250072C4B4 /* ImageServiceAlamofireImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageServiceAlamofireImage.swift; sourceTree = "<group>"; };
+		7C0B50BE248BFB800072C4B4 /* ApiServiceJust.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceJust.swift; sourceTree = "<group>"; };
 		7CA50D922485481A00F99F6A /* ApiServiceProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiServiceProtocols.swift; sourceTree = "<group>"; };
 		7CA50D932485481A00F99F6A /* ApiServiceMoya.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiServiceMoya.swift; sourceTree = "<group>"; };
 		7CA50D942485481A00F99F6A /* ApiServiceAlamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiServiceAlamofire.swift; sourceTree = "<group>"; };
@@ -128,6 +131,7 @@
 				7CD27DB62471B86700126B05 /* Kingfisher in Frameworks */,
 				7CD27DEC2472025F00126B05 /* Hero in Frameworks */,
 				7CA50D8D248529D700F99F6A /* SkeletonView in Frameworks */,
+				7C0B50C2248BFBBF0072C4B4 /* Just in Frameworks */,
 				7CD27DB32471B85100126B05 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -162,8 +166,8 @@
 				7CA50D9A2485483300F99F6A /* ImageServiceKingfisher.swift */,
 				7CA50D9C2485483300F99F6A /* ImageServiceNuke.swift */,
 				7CA50D9D2485483300F99F6A /* ImageServiceSDWebImage.swift */,
-				7CA50D9B2485483300F99F6A /* ImageServiceProtocols.swift */,
 				7C0B50B4248BD5250072C4B4 /* ImageServiceAlamofireImage.swift */,
+				7CA50D9B2485483300F99F6A /* ImageServiceProtocols.swift */,
 			);
 			path = ImageService;
 			sourceTree = "<group>";
@@ -174,6 +178,7 @@
 				7CA50D952485481B00F99F6A /* ApiServiceContainer.swift */,
 				7CA50D942485481A00F99F6A /* ApiServiceAlamofire.swift */,
 				7CA50D932485481A00F99F6A /* ApiServiceMoya.swift */,
+				7C0B50BE248BFB800072C4B4 /* ApiServiceJust.swift */,
 				7CA50D922485481A00F99F6A /* ApiServiceProtocols.swift */,
 			);
 			path = ApiService;
@@ -351,6 +356,7 @@
 				7C23D77124892A3200BA6675 /* RealmSwift */,
 				7CD20046248AC505005A4A71 /* Swinject */,
 				7C0B50B7248BD5A60072C4B4 /* AlamofireImage */,
+				7C0B50C1248BFBBF0072C4B4 /* Just */,
 			);
 			productName = RandomUserViper;
 			productReference = 7CD27D752471B58A00126B05 /* RandomUserViper.app */;
@@ -392,6 +398,7 @@
 				7C23D77024892A3200BA6675 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				7CD20045248AC504005A4A71 /* XCRemoteSwiftPackageReference "Swinject" */,
 				7C0B50B6248BD5A60072C4B4 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
+				7C0B50C0248BFBBF0072C4B4 /* XCRemoteSwiftPackageReference "Just" */,
 			);
 			productRefGroup = 7CD27D762471B58A00126B05 /* Products */;
 			projectDirPath = "";
@@ -461,6 +468,7 @@
 				7CD27DEE2472027900126B05 /* HeroIDs.swift in Sources */,
 				7CD27DC42471E2CB00126B05 /* RuntimeError.swift in Sources */,
 				7CA50D992485481B00F99F6A /* ApiServiceContainer.swift in Sources */,
+				7C0B50BF248BFB800072C4B4 /* ApiServiceJust.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -668,6 +676,14 @@
 				minimumVersion = 4.1.0;
 			};
 		};
+		7C0B50C0248BFBBF0072C4B4 /* XCRemoteSwiftPackageReference "Just" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dduan/Just";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.8.0;
+			};
+		};
 		7C23D77024892A3200BA6675 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa";
@@ -755,6 +771,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7C0B50B6248BD5A60072C4B4 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
 			productName = AlamofireImage;
+		};
+		7C0B50C1248BFBBF0072C4B4 /* Just */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7C0B50C0248BFBBF0072C4B4 /* XCRemoteSwiftPackageReference "Just" */;
+			productName = Just;
 		};
 		7C23D77124892A3200BA6675 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;

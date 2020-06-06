@@ -9,7 +9,7 @@
 import UIKit
 import AlamofireImage
 
-/// The `ImageServiceProtocol` implemented by SDWebImage.
+/// The `ImageServiceProtocol` implemented by AlamofireImage.
 class ImageServiceAlamofireImage: ImageServiceProtocol {
     
     /// Load an url into the image.
