@@ -16,11 +16,12 @@ class ImageServiceContainer {
         case nuke
         case kingfisher
         case sdwebimage
+        case alamofireimage
     }
     
     let service: ImageServiceProtocol
     
-    init(_ isType: ISType = .nuke) {
+    init(_ isType: ISType = .alamofireimage) {
         switch isType {
         case .nuke:
             service = ImageServiceNuke()
@@ -28,6 +29,8 @@ class ImageServiceContainer {
             service = ImageServiceKingfisher()
         case .sdwebimage:
             service = ImageServiceSDWebImage()
+        case .alamofireimage:
+            service = ImageServiceAlamofireImage()
         }
     }
 }
