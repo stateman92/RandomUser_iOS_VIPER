@@ -17,14 +17,15 @@ extension UITableView {
         reloadData()
         let tableViewHeight = bounds.size.height
         var delayCounter = 0
+        let animationTime = 1.75
         visibleCells.forEach { (cell) in
             cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
-            UIView.animate(withDuration: 1.75, delay: Double(delayCounter) * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+            UIView.animate(withDuration: animationTime, delay: Double(delayCounter) * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
                 cell.transform = .identity
             })
             delayCounter += 1
         }
-        run(2) {
+        run(animationTime) {
             completion()
         }
     }
